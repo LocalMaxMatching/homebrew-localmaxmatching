@@ -6,21 +6,24 @@ class Localmaxmatching < Formula
   license "MIT"
 
   depends_on "cmake" => :build
-  depends_on "gcc"
   depends_on "boost"
   depends_on "open-mpi"
 
-  fails_with :clang
+  on_linux do
+    depends_on "gcc"
+  end
 
   def install
-    ENV["CC"] = Formula["gcc"].opt_bin/"gcc-#{Formula["gcc"].version.major}"
-    ENV["CXX"] = Formula["gcc"].opt_bin/"g++-#{Formula["gcc"].version.major}"
+    args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
 
-    args = std_cmake_args + [
-      "-DCMAKE_BUILD_TYPE=Release",
-      "-DCMAKE_C_COMPILER=#{ENV["CC"]}",
-      "-DCMAKE_CXX_COMPILER=#{ENV["CXX"]}",
-    ]
+    if OS.linux?
+      ENV["CC"] = Formula["gcc"].opt_bin/"gcc-#{Formula["gcc"].version.major}"
+      ENV["CXX"] = Formula["gcc"].opt_bin/"g++-#{Formula["gcc"].version.major}"
+      args += [
+        "-DCMAKE_C_COMPILER=#{ENV["CC"]}",
+        "-DCMAKE_CXX_COMPILER=#{ENV["CXX"]}",
+      ]
+    end
 
     mkdir "build" do
       system "cmake", "..", *args
