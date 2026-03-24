@@ -2,7 +2,7 @@ class Localmaxmatching < Formula
   desc "Efficient parallel and sequential algorithms for graph matching"
   homepage "https://github.com/LocalMaxMatching/LocalMaxMatching"
   url "https://github.com/LocalMaxMatching/LocalMaxMatching/archive/refs/tags/v1.0.tar.gz"
-  sha256 "12008952ea350e942544c640b4656c075aacfeb8a8500cac467d3f91e4cd4220"
+  sha256 "7c20da2457947b625640c396ca84e4d0426521a332d1b1f2779322e951ef4f92"
   license "MIT"
 
   depends_on "cmake" => :build
