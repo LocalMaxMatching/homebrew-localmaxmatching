@@ -6,8 +6,9 @@ class Localmaxmatching < Formula
   license "MIT"
 
   depends_on "cmake" => :build
+  depends_on "gcc"
   depends_on "boost"
-  depends_on "open-mpi" => :recommended
+  depends_on "open-mpi"
 
   def install
     args = std_cmake_args + ["-DCMAKE_BUILD_TYPE=Release"]
